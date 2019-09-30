@@ -18,28 +18,35 @@ func main() {
 	// reports the initial memory usage
 	api.Report()
 
-	// reads 65 MB of temperature data into the memory!
-	temps := api.Read()
+	// returns a slice with 10 million elements.
+	// it allocates 65 MB of memory space.
+	millions := api.Read()
 
-	//
+	// ------------------------------------------------------
+
 	// SOLUTION #1:
-	//
+	// Copy the last 10 elements of the returned slice
+	// to a new slice. This will create a new backing array
+	// only with 10 elements.
+	last10 := make([]int, 10)
+	copy(last10, millions[len(millions)-10:])
 
-	// clone the last 10 elements of the returned temperatures
-	// into a new slice
-	need := make([]int, 10)
-	copy(need, temps[len(temps)-10:])
-	// make the temp slice lose reference to its backing array
-	// so that it can be cleaned from the memory
-	temps = need
+	// Make the millions slice lose reference to its backing array
+	// so that its backing array can be cleaned up from memory.
+	millions = last10
 
-	//
 	// SOLUTION #2:
-	//
+	// Similar to the 1st solution. It does the same thing.
+	// But this code is more concise. Use this one.
 
-	// The code below does the same thing like the code above but in one line.
-	// temps = append([]int(nil), temps[len(temps)-10:]...)
+	// millions = append([]int(nil), millions[len(millions)-10:]...)
+
+	fmt.Printf("\nLast 10 elements: %d\n\n", last10)
+
+	// ------------------------------------------------------
 
 	api.Report()
-	fmt.Fprintln(ioutil.Discard, temps[0])
+
+	// don't worry about this code yet.
+	fmt.Fprintln(ioutil.Discard, millions[0])
 }

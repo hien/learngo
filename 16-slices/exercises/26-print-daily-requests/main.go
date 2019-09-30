@@ -1,16 +1,49 @@
 package main
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Print daily requests
 //
-//  You've got a requests log for a system in a slice: `reqs`.
-//  The log contains the total request counts per 8 hours.
+//  You've got request logs of a web server. The log data
+//  contains 8-hourly totals per each day. It is stored
+//  in the `reqs` slice.
 //
-//  The reqs slice is a single-dimensional slice but you need
-//  to group the requests daily into a slice named: `daily`.
+//  Find and print the total requests per day, as well as
+//  the grand total.
 //
-//  Please follow the instructions inside the code to solve
-//  the exercise.
+//  See the `reqs` slice and the steps in the code below.
+//
+//
+// RESTRICTIONS
+//
+//   1. You need to produce the daily slice, don't just loop
+//      and print the element totals directly. The goal is
+//      gaining more experience in slice operations.
+//
+//   2. Your code should work even if you add to or remove the
+//      existing elements from the `reqs` slice.
+//
+//      For example, after solving the exercise, try it with
+//      this new data:
+//
+//      reqs := []int{
+// 	      500, 600, 250,
+// 	      200, 400, 50,
+// 	      900, 800, 600,
+// 	      750, 250, 100,
+// 	      150, 654, 235,
+// 	      320, 534, 765,
+// 	      121, 876, 285,
+// 	      543, 642,
+// 	      // the last element is missing (your code should be able to handle this)
+// 	      // that is why you shouldn't calculate the `size` below manually.
+//      }
+//
+//      The grand total of the new data should be 10525.
 //
 //
 // EXPECTED OUTPUT
@@ -23,87 +56,51 @@ package main
 // ---------------------------------------------------------
 
 func main() {
-	//
-	// #1: DAILY REQUESTS DATA
-	//
-	// . The system collects and groups the requests per 8 hours
-	//
-	// . So there are 3 requests totals per day
-	//
-	// . Your code should be robust enough to work with
-	//   insufficient data. For example, in the last day
-	//   there are only two request totals: 100 and 150.
-	//
-	//   So, don't forget to handle that edge case as well.
-	//
-	// . Uncomment the code below and start
-	//
+	// There are 3 request totals per day (8-hourly)
+	const N = 3
 
-	// reqs := []int{
-	//	// 1st day
-	//	500, 600, 250,
-	//	// 2nd day
-	//	200, 400, 50,
-	//	// 3rd day
-	//	900, 800, 600,
-	//	// 4th day
-	//	750, 250, 100,
-	//	// last day
-	//	100, 150,
-	// }
+	// DAILY REQUESTS DATA (8-HOURLY TOTALS PER DAY)
+	reqs := []int{
+		500, 600, 250, // 1st day: 1350 requests
+		200, 400, 50, // 2nd day: 650 requests
+		900, 800, 600, // 3rd day: 2300 requests
+		750, 250, 100, // 4th day: 1100 requests
+		// grand total: 5400 requests
+	}
 
-	//
-	// #2: Group the `reqs` per day into a slice named: `daily`
-	//
-	// . Create the daily slice using the `make` function
-	//
-	// . Anticipate the length argument to the make function using this data:
-	//
-	//   + The length of the reqs slice
-	//   + There are 3 requests totals per day
-	//   + There are residual elements (the last day)
-	//
-	//   ! So, do not blindly allocate a slice.
-	//
-	//   ! Allocate the slice efficiently with the exact size needed.
-	//
-	// . Then append to it the daily requests in a "loop"
-	//
+	// ================================================
+	// #1: Make a new slice with the exact size needed.
 
-	//
-	// #3: Print the header:
-	//
-	// Day       Requests
-	// ====================
-	//
+	_ = reqs // remove this when you start
 
-	//
-	// #4: Print the data per day along with the totals:
-	//
-	// 1         500
-	// 1         600
-	// 1         250
-	// --------------------
-	//           1350  --> Print the daily total requests
-	//
-	// 2         200
-	// 2         400
-	// 2         50
-	// --------------------
-	//           650
-	//
-	//           2000  --> Also print the grand total
+	size := 0 // you need to find the size.
+	daily := make([][]int, 0, size)
 
-	// ------------------------------------------------------------------------
+	// ================================================
+
+	// ================================================
+	// #2: Group the `reqs` per day into the slice: `daily`.
 	//
-	// ❤️ NOTE ❤️
-	//
-	// If you could't solve this challenge, please do not get discouraged.
-	//
-	// Look at the solution, then try to solve it again. This is valuable too.
-	//
-	// Then ️change the request data, the number of requests per day (now it's 3),
-	// etc., and then try to solve it again.
-	//
-	// ------------------------------------------------------------------------
+	// So the daily will be:
+	// [
+	//  [500, 600, 250]
+	//  [200, 400, 50]
+	//  [900, 800, 600]
+	//  [750, 250, 100]
+	// ]
+
+	_ = daily // remove this when you start
+
+	// ================================================
+	// #3: Print the results
+
+	// Print a header
+	fmt.Printf("%-10s%-10s\n", "Day", "Requests")
+	fmt.Println(strings.Repeat("=", 20))
+
+	// Loop over the daily slice and its inner slices to find
+	// the daily totals and the grand total.
+	// ...
+
+	// ================================================
 }
